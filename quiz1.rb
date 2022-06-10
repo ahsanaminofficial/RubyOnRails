@@ -10,7 +10,10 @@ class Quiz
 
     def start
         puts "Quiz Number 1"
-        timeLimit = 5
+        timeLimit = 30
+
+        puts "Enter the time limit of the quiz"
+        timeLimit = gets.to_i
 
         puts "Press enter to start the timer..."
         temp = gets
@@ -21,8 +24,7 @@ class Quiz
         total = @data.length
         correct = 0
 
-        puts Time.now
-        puts Time.now + 10
+        puts timeLimit
 
         while current_time < start_time + timeLimit do
             if i > @data.length - 1
@@ -41,7 +43,7 @@ class Quiz
             current_time = Time.now
         end
 
-    rescue Timeout::Error
+        rescue Timeout::Error
         puts "Quiz timer has expired"
 
         puts "Total number of questions were: " + total.to_s
@@ -53,16 +55,7 @@ end
 
 
 
-
-
-
-
-
-
-
 data = CSV.read("problems.csv")
-# puts data[0][0]
-# puts data[0][1]
 
 quiz_obj = Quiz.new(data)
 quiz_obj.start()
